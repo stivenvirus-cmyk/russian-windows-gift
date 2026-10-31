@@ -23,12 +23,13 @@ h1{text-align:center;font-size:clamp(30px,5vw,58px);margin:4px 0 8px;color:#f2c4
 .window:after{right:0;top:0;width:50%;height:100%;transform-origin:right center}
 .window.open:before{transform:perspective(500px) rotateY(-105deg)}
 .window.open:after{transform:perspective(500px) rotateY(105deg)}
-.cross{position:absolute;z-index:2;inset:0;pointer-events:none;background:linear-gradient(90deg,transparent 48%,#9a5727 49%,#9a5727 51%,transparent 52%),linear-gradient(0deg,transparent 48%,#9a5727 49%,#9a5727 51%,transparent 52%)}
+.cross{position:absolute;z-index:2;inset:0;pointer-events:none;transition:opacity .35s ease;background:linear-gradient(90deg,transparent 48%,#9a5727 49%,#9a5727 51%,transparent 52%),linear-gradient(0deg,transparent 48%,#9a5727 49%,#9a5727 51%,transparent 52%)}
 .photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.95)}
 .note{position:absolute;z-index:5;left:10px;right:10px;bottom:10px;padding:10px 9px;background:#1a0e0bdd;border:1px solid #c88b48;color:#ffe9c2;text-align:center;font-size:15px;opacity:0;transform:translateY(15px);transition:.8s 1s}
 .window.open .note{opacity:1;transform:translateY(0)}
 .label{position:absolute;z-index:6;top:9px;left:50%;transform:translateX(-50%);font-size:15px;color:#f6d58e;text-shadow:0 2px 2px #000;pointer-events:none;transition:.5s}
 .window.open .label{opacity:0}
+.window.open .cross{opacity:0}
 .tap{margin-top:10px;text-align:center;color:#d9b785;font-size:13px}
 .finish{text-align:center;margin:35px auto 5px;max-width:760px;font-size:22px;line-height:1.5;color:#f4d69d;opacity:.9}
 #soundHint{position:fixed;left:50%;top:14px;transform:translateX(-50%);z-index:40;background:#2b160eaa;border:1px solid #b87532;border-radius:999px;padding:8px 14px;color:#f7cf86;font-size:13px;opacity:0;pointer-events:none;transition:.4s}.player{position:fixed;right:16px;bottom:16px;z-index:30;background:#29150e;border:1px solid #b87532;border-radius:50%;width:48px;height:48px;color:#f7cf86;display:grid;place-items:center;cursor:pointer;box-shadow:0 5px 20px #0008}
