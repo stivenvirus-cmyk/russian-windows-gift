@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Для тебя</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Georgia,"Times New Roman",serif;background:#120d0b;color:#f8ead0}
+body{overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;background:radial-gradient(circle at 50% 20%,#5a321d 0,#24160f 38%,#0b0807 100%);z-index:-4}
+.snow{position:fixed;inset:0;pointer-events:none;z-index:20;background-image:radial-gradient(2px 2px at 10% 15%,#fff 50%,transparent 52%),radial-gradient(3px 3px at 25% 70%,#fff 50%,transparent 52%),radial-gradient(2px 2px at 60% 30%,#fff 50%,transparent 52%),radial-gradient(3px 3px at 85% 55%,#fff 50%,transparent 52%),radial-gradient(2px 2px at 45% 90%,#fff 50%,transparent 52%);background-size:260px 260px;opacity:.55;animation:snow 12s linear infinite}
+@keyframes snow{to{background-position:0 260px,40px 300px,-30px 250px,20px 320px,-20px 280px}}
+.page{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:28px 14px}
+.house{width:min(1120px,100%);position:relative;padding:38px 28px 34px;background:linear-gradient(90deg,#2a160d,#4a2815 50%,#28150d);border:10px solid #160b07;box-shadow:0 25px 80px #000b;border-radius:10px}
+.house:before{content:"";position:absolute;left:-25px;right:-25px;top:-32px;height:80px;background:#1c0e09;clip-path:polygon(0 100%,50% 0,100% 100%);z-index:-1}
+.orn{position:absolute;inset:10px;border:2px solid #b87532;box-shadow:inset 0 0 0 5px #3a1b0e;pointer-events:none}
+h1{text-align:center;font-size:clamp(30px,5vw,58px);margin:4px 0 8px;color:#f2c46e;text-shadow:0 3px 0 #5b2d12}
+.sub{text-align:center;color:#f4dfbd;font-size:18px;margin-bottom:30px}
+.windows{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;max-width:900px;margin:auto}
+.window{position:relative;height:300px;background:#080b0c;border:12px solid #9a5727;box-shadow:0 0 0 5px #32170c,0 15px 30px #0008;overflow:hidden}
+.window:before,.window:after{content:"";position:absolute;z-index:3;background:linear-gradient(135deg,#6d3719,#a7622c 50%,#4c250f);transition:transform 1s cubic-bezier(.2,.8,.2,1);box-shadow:inset 0 0 0 3px #c98542}
+.window:before{left:0;top:0;width:50%;height:100%;transform-origin:left center}
+.window:after{right:0;top:0;width:50%;height:100%;transform-origin:right center}
+.window.open:before{transform:perspective(500px) rotateY(-105deg)}
+.window.open:after{transform:perspective(500px) rotateY(105deg)}
+.cross{position:absolute;z-index:2;inset:0;pointer-events:none;background:linear-gradient(90deg,transparent 48%,#9a5727 49%,#9a5727 51%,transparent 52%),linear-gradient(0deg,transparent 48%,#9a5727 49%,#9a5727 51%,transparent 52%)}
+.photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.95)}
+.note{position:absolute;z-index:5;left:10px;right:10px;bottom:10px;padding:10px 9px;background:#1a0e0bdd;border:1px solid #c88b48;color:#ffe9c2;text-align:center;font-size:15px;opacity:0;transform:translateY(15px);transition:.8s 1s}
+.window.open .note{opacity:1;transform:translateY(0)}
+.label{position:absolute;z-index:6;top:9px;left:50%;transform:translateX(-50%);font-size:15px;color:#f6d58e;text-shadow:0 2px 2px #000;pointer-events:none;transition:.5s}
+.window.open .label{opacity:0}
+.tap{margin-top:10px;text-align:center;color:#d9b785;font-size:13px}
+.finish{text-align:center;margin:35px auto 5px;max-width:760px;font-size:22px;line-height:1.5;color:#f4d69d;opacity:.9}
+.player{position:fixed;right:16px;bottom:16px;z-index:30;background:#29150e;border:1px solid #b87532;border-radius:50%;width:48px;height:48px;color:#f7cf86;display:grid;place-items:center;cursor:pointer;box-shadow:0 5px 20px #0008}
+@media(max-width:800px){.windows{grid-template-columns:repeat(2,1fr)}.window{height:260px}}
+@media(max-width:540px){.page{padding:14px 8px}.house{padding:30px 12px 24px;border-width:7px}.windows{grid-template-columns:1fr 1fr;gap:15px}.window{height:210px;border-width:8px}.note{font-size:12px}.sub{font-size:15px}.finish{font-size:18px}}
+</style>
+</head>
+<body>
+<div class="snow"></div>
+<audio id="music" src="track.mp3" preload="auto" autoplay loop playsinline></audio>
+<button class="player" id="player" aria-label="Музыка">♫</button>
+<main class="page"><section class="house"><div class="orn"></div>
+<h1>Открой окошко…</h1>
+<div class="sub">Там для тебя кое-что спрятано ❤️</div>
+<div class="windows">
+<div class="window" data-index="0"><img class="photo" src="photo1.jpg" alt=""><div class="cross"></div><div class="label">Окошко первое</div><div class="note">«Ты и правда дала почувствовать мне, что жизнь существует.»</div><div class="tap">нажми</div></div><div class="window" data-index="1"><img class="photo" src="photo2.jpg" alt=""><div class="cross"></div><div class="label">Окошко второе</div><div class="note">«Я думал, справлюсь… но, увы, погряз я в чувствах.»</div><div class="tap">нажми</div></div><div class="window" data-index="2"><img class="photo" src="photo3.jpg" alt=""><div class="cross"></div><div class="label">Окошко третье</div><div class="note">«Иногда один человек становится целым маленьким миром.»</div><div class="tap">нажми</div></div><div class="window" data-index="3"><img class="photo" src="photo4.jpg" alt=""><div class="cross"></div><div class="label">Окошко четвёртое</div><div class="note">«И пусть молчу порой — внутри меня намного больше, чем слова.»</div><div class="tap">нажми</div></div><div class="window" data-index="4"><img class="photo" src="photo5.jpg" alt=""><div class="cross"></div><div class="label">Окошко пятое</div><div class="note">«Ты стала мне близкой. Наверное, поэтому я улыбаюсь чаще.»</div><div class="tap">нажми</div></div><div class="window" data-index="5"><img class="photo" src="photo6.jpg" alt=""><div class="cross"></div><div class="label">Окошко шестое</div><div class="note">«А если счастье бывает простым — пусть оно будет вот таким.»</div><div class="tap">нажми</div></div>
+</div>
+<div class="finish">Открывай по одному. Не торопись — у каждого окна своя маленькая история.</div>
+</section></main>
+<script>
+const audio=document.getElementById('music'),player=document.getElementById('player');
+function play(){audio.play().catch(()=>{});}
+window.addEventListener('load',play);
+['pointerdown','touchstart','keydown'].forEach(e=>window.addEventListener(e,play,{once:true}));
+player.onclick=()=>audio.paused?audio.play():audio.pause();
+document.querySelectorAll('.window').forEach(w=>w.addEventListener('click',()=>w.classList.toggle('open')));
+</script>
+</body></html>
