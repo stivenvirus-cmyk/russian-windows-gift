@@ -31,14 +31,15 @@ h1{text-align:center;font-size:clamp(30px,5vw,58px);margin:4px 0 8px;color:#f2c4
 .window.open .label{opacity:0}
 .tap{margin-top:10px;text-align:center;color:#d9b785;font-size:13px}
 .finish{text-align:center;margin:35px auto 5px;max-width:760px;font-size:22px;line-height:1.5;color:#f4d69d;opacity:.9}
-.player{position:fixed;right:16px;bottom:16px;z-index:30;background:#29150e;border:1px solid #b87532;border-radius:50%;width:48px;height:48px;color:#f7cf86;display:grid;place-items:center;cursor:pointer;box-shadow:0 5px 20px #0008}
+#soundHint{position:fixed;left:50%;top:14px;transform:translateX(-50%);z-index:40;background:#2b160eaa;border:1px solid #b87532;border-radius:999px;padding:8px 14px;color:#f7cf86;font-size:13px;opacity:0;pointer-events:none;transition:.4s}.player{position:fixed;right:16px;bottom:16px;z-index:30;background:#29150e;border:1px solid #b87532;border-radius:50%;width:48px;height:48px;color:#f7cf86;display:grid;place-items:center;cursor:pointer;box-shadow:0 5px 20px #0008}
 @media(max-width:800px){.windows{grid-template-columns:repeat(2,1fr)}.window{height:260px}}
 @media(max-width:540px){.page{padding:14px 8px}.house{padding:30px 12px 24px;border-width:7px}.windows{grid-template-columns:1fr 1fr;gap:15px}.window{height:210px;border-width:8px}.note{font-size:12px}.sub{font-size:15px}.finish{font-size:18px}}
+@media(max-width:540px){#soundHint{font-size:12px}}
 </style>
 </head>
 <body>
 <div class="snow"></div>
-<audio id="music" src="track.mp3" preload="auto" autoplay loop playsinline></audio>
+<audio id="music" src="track.mp3" preload="auto" autoplay loop playsinline></audio><div id="soundHint">♫</div>
 <button class="player" id="player" aria-label="Музыка">♫</button>
 <main class="page"><section class="house"><div class="orn"></div>
 <h1>Открой окошко…</h1>
@@ -57,10 +58,10 @@ h1{text-align:center;font-size:clamp(30px,5vw,58px);margin:4px 0 8px;color:#f2c4
 <div class="finish">Открывай по одному. Не торопись — у каждого окна своя маленькая история.</div>
 </section></main>
 <script>
-const audio=document.getElementById('music'),player=document.getElementById('player');
-function play(){audio.play().catch(()=>{});}
-window.addEventListener('load',play);
-['pointerdown','touchstart','keydown'].forEach(e=>window.addEventListener(e,play,{once:true}));
+const audio=document.getElementById('music'),player=document.getElementById('player'),hint=document.getElementById('soundHint');
+async function play(){try{await audio.play();hint.style.opacity='0';}catch(e){hint.textContent='Нажми в любом месте — включу музыку ♫';hint.style.opacity='1';}}
+window.addEventListener('load',()=>setTimeout(play,120));
+['pointerdown','touchstart','keydown'].forEach(e=>window.addEventListener(e,play,{once:true,passive:true}));
 player.onclick=()=>audio.paused?audio.play():audio.pause();
 document.querySelectorAll('.window').forEach(w=>w.addEventListener('click',()=>w.classList.toggle('open')));
 </script>
